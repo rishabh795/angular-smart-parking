@@ -1,0 +1,107 @@
+<div>
+    <h2>Create Vehicle</h2><br><br>
+    <div>
+        <label>Type:</label><br>
+        <select [(ngModel)]="vehicleCreate.type">
+            <option value="" selected disabled>Select Option</option>
+            <option *ngFor="let ele of vehicleTypeEnumList" [value]="ele">{{ele | titlecase}}</option>
+        </select><br><br>
+
+        <label>User:</label><br>
+        <select [(ngModel)]="vehicleCreate.user">
+            <option value="" selected disabled>Select Option</option>
+            <div *ngIf="allUsers">
+                <option *ngFor="let ele of allUsers" [ngValue]="ele">{{ele.id}}</option>
+            </div>
+        </select><br><br>
+
+        <button (click)="createVehicle()">Create</button><br><br>
+    </div>
+    <div *ngIf="messageCreate">
+        {{messageCreate}}<br><br>
+    </div>
+</div>
+
+<div *ngIf="vehicleUpdate && vehicleUpdate.id!==0">
+    <h2>Update Vehicle having ID: &nbsp; {{vehicleUpdate.id}}</h2><br><br>
+    <div>
+        <label>Type:</label><br>
+        <select [(ngModel)]="vehicleUpdate.type">
+            <option value="" selected disabled>Select Option</option>
+            <option *ngFor="let ele of vehicleTypeEnumList" [value]="ele">{{ele | titlecase}}</option>
+        </select><br><br>
+
+        <label>User:</label><br>
+        <select [(ngModel)]="vehicleUpdate.user">
+            <option value="" selected disabled>Select Option</option>
+            <div *ngIf="allUsers">
+                <option *ngFor="let ele of allUsers" [ngValue]="ele">{{ele.id}}</option>
+            </div>
+        </select><br><br>
+
+        <button (click)="updateVehicleById()">Update</button><br><br>
+    </div>
+    <div *ngIf="messageUpdate">
+        {{messageUpdate}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>List of All Vehicles</h2><br><br>
+    <div>
+        <table *ngIf="vehicleList">
+            <thead>
+                <th>ID</th>
+                <th>Type</th>
+                <th>User</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody *ngFor="let vehicle of vehicleList">
+                <td>{{vehicle.id}}</td>
+                <td>{{vehicle.type}}</td>
+                <td>
+                    <span>ID:&nbsp;{{vehicle.user.id}}</span><br>
+                    <span>Name:&nbsp;{{vehicle.user.name}}</span><br>
+                    <span>Email:&nbsp;{{vehicle.user.email}}</span><br>
+                </td>
+                <td><button (click)="deleteVehicleById(vehicle.id!)">Delete</button></td>
+                <td><button (click)="populateUpdateForm(vehicle)">Edit</button></td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageList">
+        {{messageList}}<br><br>
+    </div>
+    <div *ngIf="messageDelete">
+        {{messageDelete}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>Get Vehicle By ID</h2><br><br>
+        <label>Vehicle ID:</label><br>
+        <input type="number" [(ngModel)]="vehicleGetId"><br><br>
+        <button (click)="getVehicleById()">Get</button><br><br>
+    <div>
+        <table *ngIf="isVehicleGotten && vehicleGet.id!==0">
+            <thead>
+                <th>ID</th>
+                <th>Type</th>
+                <th>User</th>
+            </thead>
+            <tbody>
+                <td>{{vehicleGet.id}}</td>
+                <td>{{vehicleGet.type}}</td>
+                <td>
+                    <span>ID:&nbsp;{{vehicleGet.user.id}}</span><br>
+                    <span>Name:&nbsp;{{vehicleGet.user.name}}</span><br>
+                    <span>Email:&nbsp;{{vehicleGet.user.email}}</span><br>
+                </td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageGet">
+        {{messageGet}}<br><br>
+    </div>
+</div>

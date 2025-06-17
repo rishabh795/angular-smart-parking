@@ -1,0 +1,89 @@
+<div>
+    <h2>Create ParkingSpot</h2><br><br>
+    <div>
+        <label>Location:</label><br>
+        <input type="text" [(ngModel)]="parkingSpotCreate.location"><br><br>
+
+        <label>Status:</label><br>
+        <select [(ngModel)]="parkingSpotCreate.status">
+            <option value="" selected disabled>Select Option</option>
+            <option *ngFor="let ele of parkingSpotTypeEnumList" [value]="ele">{{ele | titlecase}}</option>
+        </select><br><br>
+
+        <button (click)="createParkingSpot()">Create</button><br><br>
+    </div>
+    <div *ngIf="messageCreate">
+        {{messageCreate}}<br><br>
+    </div>
+</div>
+
+<div *ngIf="parkingSpotUpdate && parkingSpotUpdate.id!==0">
+    <h2>Update ParkingSpot having ID: &nbsp; {{parkingSpotUpdate.id}}</h2><br><br>
+    <div>
+        <label>Location:</label><br>
+        <input type="text" [(ngModel)]="parkingSpotUpdate.location"><br><br>
+
+        <label>Status:</label><br>
+        <select [(ngModel)]="parkingSpotUpdate.status">
+            <option value="" selected disabled>Select Option</option>
+            <option *ngFor="let ele of parkingSpotTypeEnumList" [value]="ele">{{ele | titlecase}}</option>
+        </select><br><br>
+
+        <button (click)="updateParkingSpotById()">Update</button><br><br>
+    </div>
+    <div *ngIf="messageUpdate">
+        {{messageUpdate}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>List of All ParkingSpots</h2><br><br>
+    <div>
+        <table *ngIf="parkingSpotList">
+            <thead>
+                <th>ID</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody *ngFor="let parkingSpot of parkingSpotList">
+                <td>{{parkingSpot.id}}</td>
+                <td>{{parkingSpot.location}}</td>
+                <td>{{parkingSpot.status}}</td>
+                <td><button (click)="deleteParkingSpotById(parkingSpot.id!)">Delete</button></td>
+                <td><button (click)="populateUpdateForm(parkingSpot)">Edit</button></td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageList">
+        {{messageList}}<br><br>
+    </div>
+    <div *ngIf="messageDelete">
+        {{messageDelete}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>Get ParkingSpot By ID</h2><br><br>
+        <label>ParkingSpot ID:</label><br>
+        <input type="number" [(ngModel)]="parkingSpotGetId"><br><br>
+        <button (click)="getParkingSpotById()">Get</button><br><br>
+    <div>
+        <table *ngIf="isParkingSpotGotten && parkingSpotGet.id!==0">
+            <thead>
+                <th>ID</th>
+                <th>Location</th>
+                <th>Status</th>
+            </thead>
+            <tbody>
+                <td>{{parkingSpotGet.id}}</td>
+                <td>{{parkingSpotGet.location}}</td>
+                <td>{{parkingSpotGet.status}}</td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageGet">
+        {{messageGet}}<br><br>
+    </div>
+</div>

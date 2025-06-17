@@ -1,0 +1,5 @@
+services:
+  frontend:
+    build: ./smart-parking
+    ports:
+      - "80:80"

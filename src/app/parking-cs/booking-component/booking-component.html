@@ -1,0 +1,156 @@
+<div>
+    <h2>Create Booking</h2><br><br>
+    <div>
+        <label>User:</label><br>
+        <select [(ngModel)]="bookingCreate.userId">
+            <option value="" selected disabled>Select Option</option>
+            <div *ngIf="allUsers">
+                <option *ngFor="let ele of allUsers" [value]="ele.id">{{ele.id}}</option>
+            </div>
+        </select><br><br>
+
+        <label>ParkingSpot:</label><br>
+        <select [(ngModel)]="bookingCreate.parkingSpot">
+            <option value="" selected disabled>Select Option</option>
+            <div *ngIf="allParkingSpots">
+                <option *ngFor="let ele of allParkingSpots" [ngValue]="ele">{{ele.id}}</option>
+            </div>
+        </select><br><br>
+
+        <label>Timestamp:</label><br>
+        <input type="datetime-local" [(ngModel)]="bookingCreate.timestamp"><br><br>
+
+        <button (click)="createBooking()">Create</button><br><br>
+    </div>
+    <div *ngIf="messageCreate">
+        {{messageCreate}}<br><br>
+    </div>
+</div>
+
+<div *ngIf="bookingUpdate && bookingUpdate.id!==0">
+    <h2>Update Booking having ID: &nbsp; {{bookingUpdate.id}}</h2><br><br>
+    <div>
+        <label>User:</label><br>
+        <select [(ngModel)]="bookingUpdate.userId">
+            <option value="" selected disabled>Select Option</option>
+            <div *ngIf="allUsers">
+                <option *ngFor="let ele of allUsers" [value]="ele.id">{{ele.id}}</option>
+            </div>
+        </select><br><br>
+
+        <label>ParkingSpot:</label><br>
+        <select [(ngModel)]="bookingUpdate.parkingSpot">
+            <option value="" selected disabled>Select Option</option>
+            <div *ngIf="allParkingSpots">
+                <option *ngFor="let ele of allParkingSpots" [ngValue]="ele">{{ele.id}}</option>
+            </div>
+        </select><br><br>
+
+        <label>Timestamp:</label><br>
+        <input type="datetime-local" [(ngModel)]="bookingUpdate.timestamp"><br><br>
+
+
+        <button (click)="updateBookingById()">Update</button><br><br>
+    </div>
+    <div *ngIf="messageUpdate">
+        {{messageUpdate}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>List of All Bookings</h2><br><br>
+    <div>
+        <table *ngIf="bookingList">
+            <thead>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Parking Spot</th>
+                <th>Timestamp</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody *ngFor="let booking of bookingList">
+                <td>{{booking.id}}</td>
+                <td>{{booking.userId}}</td>
+                <td>
+                    <span>ID:&nbsp;{{booking.parkingSpot.id}}</span><br>
+                    <span>Location:&nbsp;{{booking.parkingSpot.location}}</span><br>
+                    <span>Status:&nbsp;{{booking.parkingSpot.status}}</span><br>
+                </td>
+                <td>{{booking.timestamp | date:'medium'}}</td>
+                <td><button (click)="deleteBookingById(booking.id!)">Delete</button></td>
+                <td><button (click)="populateUpdateForm(booking)">Edit</button></td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageList">
+        {{messageList}}<br><br>
+    </div>
+    <div *ngIf="messageDelete">
+        {{messageDelete}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>Get Booking By ID</h2><br><br>
+        <label>Booking ID:</label><br>
+        <input type="number" [(ngModel)]="bookingGetId"><br><br>
+        <button (click)="getBookingById()">Get</button><br><br>
+    <div>
+        <table *ngIf="isBookingGotten && bookingGet.id!==0">
+            <thead>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Parking Spot Details</th>
+                <th>Timestamp</th>
+            </thead>
+            <tbody>
+                <td>{{bookingGet.id}}</td>
+                <td>{{bookingGet.userId}}</td>
+                <td>
+                    <span>ID:&nbsp;{{bookingGet.parkingSpot.id}}</span><br>
+                    <span>Location:&nbsp;{{bookingGet.parkingSpot.location}}</span><br>
+                    <span>Status:&nbsp;{{bookingGet.parkingSpot.status}}</span><br>
+                </td>
+                <td>{{bookingGet.timestamp | date:'medium'}}</td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageGet">
+        {{messageGet}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>Get Booking Details By ID</h2><br><br>
+        <label>Booking ID:</label><br>
+        <input type="number" [(ngModel)]="bookingDetailsId"><br><br>
+        <button (click)="getBookingDetailsById()">Get</button><br><br>
+    <div>
+        <table *ngIf="isBookingDetailsGotten && bookingDetails.id!==0">
+            <thead>
+                <th>ID</th>
+                <th>User Details</th>
+                <th>Parking Spot Details</th>
+                <th>Timestamp</th>
+            </thead>
+            <tbody>
+                <td>{{bookingDetails.id}}</td>
+                <td>
+                    <span>ID:&nbsp;{{bookingDetails.user.id}}</span><br>
+                    <span>Name:&nbsp;{{bookingDetails.user.name}}</span><br>
+                    <span>Email:&nbsp;{{bookingDetails.user.email}}</span><br>
+                </td>
+                <td>
+                    <span>ID:&nbsp;{{bookingDetails.parkingSpot.id}}</span><br>
+                    <span>Location:&nbsp;{{bookingDetails.parkingSpot.location}}</span><br>
+                    <span>Status:&nbsp;{{bookingDetails.parkingSpot.status}}</span><br>
+                </td>
+                <td>{{bookingDetails.timestamp | date:'medium'}}</td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageDetails">
+        {{messageDetails}}<br><br>
+    </div>
+</div>

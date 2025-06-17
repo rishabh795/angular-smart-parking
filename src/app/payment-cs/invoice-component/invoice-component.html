@@ -1,0 +1,137 @@
+<div>
+    <h2>Create Invoice</h2><br><br>
+    <div>
+        <label>Booking ID:</label><br>
+        <select [(ngModel)]="invoiceCreate.bookingId">
+            <option value="" selected disabled>Select Option</option>
+            <div *ngIf="allBookings">
+                <option *ngFor="let ele of allBookings" [value]="ele.id">{{ele.id}}</option>
+            </div>
+        </select><br><br>
+
+        <label>Amount:</label><br>
+        <input type="number" step="0.01" [(ngModel)]="invoiceCreate.amount"><br><br>
+
+        <label>Date:</label><br>
+        <input type="date" [(ngModel)]="invoiceCreate.date"><br><br>
+
+        <button (click)="createInvoice()">Create</button><br><br>
+    </div>
+    <div *ngIf="messageCreate">
+        {{messageCreate}}<br><br>
+    </div>
+</div>
+
+<div *ngIf="invoiceUpdate && invoiceUpdate.id!==0">
+    <h2>Update Invoice having ID: &nbsp; {{invoiceUpdate.id}}</h2><br><br>
+    <div>
+        <label>Booking ID:</label><br>
+        <select [(ngModel)]="invoiceUpdate.bookingId">
+            <option value="" selected disabled>Select Option</option>
+            <div *ngIf="allBookings">
+                <option *ngFor="let ele of allBookings" [value]="ele.id">{{ele.id}}</option>
+            </div>
+        </select><br><br>
+
+        <label>Amount:</label><br>
+        <input type="number" step="0.01" [(ngModel)]="invoiceUpdate.amount"><br><br>
+
+        <label>Date:</label><br>
+        <input type="date" [(ngModel)]="invoiceUpdate.date"><br><br>
+
+        
+
+        <button (click)="updateInvoiceById()">Update</button><br><br>
+    </div>
+    <div *ngIf="messageUpdate">
+        {{messageUpdate}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>List of All Invoices</h2><br><br>
+    <div>
+        <table *ngIf="invoiceList">
+            <thead>
+                <th>ID</th>
+                <th>Booking ID</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody *ngFor="let invoice of invoiceList">
+                <td>{{invoice.id}}</td>
+                <td>{{invoice.bookingId}}</td>
+                <td>{{invoice.amount}}</td>
+                <td>{{invoice.date}}</td>
+                <td><button (click)="deleteInvoiceById(invoice.id!)">Delete</button></td>
+                <td><button (click)="populateUpdateForm(invoice)">Edit</button></td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageList">
+        {{messageList}}<br><br>
+    </div>
+    <div *ngIf="messageDelete">
+        {{messageDelete}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>Get Invoice By ID</h2><br><br>
+        <label>Invoice ID:</label><br>
+        <input type="number" [(ngModel)]="invoiceGetId"><br><br>
+        <button (click)="getInvoiceById()">Get</button><br><br>
+    <div>
+        <table *ngIf="isInvoiceGotten && invoiceGet.id!==0">
+            <thead>
+                <th>ID</th>
+                <th>Booking ID</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </thead>
+            <tbody>
+                <td>{{invoiceGet.id}}</td>
+                <td>{{invoiceGet.bookingId}}</td>
+                <td>{{invoiceGet.amount}}</td>
+                <td>{{invoiceGet.date}}</td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageGet">
+        {{messageGet}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>Get Invoice Details By ID</h2><br><br>
+        <label>Invoice ID:</label><br>
+        <input type="number" [(ngModel)]="invoiceDetailsId"><br><br>
+        <button (click)="getInvoiceDetailsById()">Get</button><br><br>
+    <div>
+        <table *ngIf="isInvoiceDetailsGotten && invoiceDetails.id!==0">
+            <thead>
+                <th>ID</th>
+                <th>Booking Details</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </thead>
+            <tbody>
+                <td>{{invoiceDetails.id}}</td>
+                <td>
+                    <span>ID:&nbsp;{{invoiceDetails.booking.id}}</span><br>
+                    <span>User ID:&nbsp;{{invoiceDetails.booking.userId}}</span><br>
+                    <span>Parking Spot Location:&nbsp;{{invoiceDetails.booking.parkingSpot.location}}</span><br>
+                    <span>Timestamp:&nbsp;{{invoiceDetails.booking.timestamp | date:'medium'}}</span><br>
+                </td>
+                <td>{{invoiceDetails.amount}}</td>
+                <td>{{invoiceDetails.date}}</td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageDetails">
+        {{messageDetails}}<br><br>
+    </div>
+</div>
+

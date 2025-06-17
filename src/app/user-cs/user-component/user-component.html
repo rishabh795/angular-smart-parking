@@ -1,0 +1,83 @@
+<div>
+    <h2>Create User</h2><br><br>
+    <div>
+        <label>Name:</label><br>
+        <input type="text" [(ngModel)]="userCreate.name"><br><br>
+
+        <label>Email:</label><br>
+        <input type="text" [(ngModel)]="userCreate.email"><br><br>
+
+        <button (click)="createUser()">Create</button><br><br>
+    </div>
+    <div *ngIf="messageCreate">
+        {{messageCreate}}<br><br>
+    </div>
+</div>
+
+<div *ngIf="userUpdate && userUpdate.id!==0">
+    <h2>Update User having ID: &nbsp; {{userUpdate.id}}</h2><br><br>
+    <div>
+        <label>Name:</label><br>
+        <input type="text" [(ngModel)]="userUpdate.name"><br><br>
+
+        <label>Email:</label><br>
+        <input type="text" [(ngModel)]="userUpdate.email"><br><br>
+
+        <button (click)="updateUserById()">Update</button><br><br>
+    </div>
+    <div *ngIf="messageUpdate">
+        {{messageUpdate}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>List of All Users</h2><br><br>
+    <div>
+        <table *ngIf="userList">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody *ngFor="let user of userList">
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td><button (click)="deleteUserById(user.id!)">Delete</button></td>
+                <td><button (click)="populateUpdateForm(user)">Edit</button></td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageList">
+        {{messageList}}<br><br>
+    </div>
+    <div *ngIf="messageDelete">
+        {{messageDelete}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>Get User By ID</h2><br><br>
+        <label>User ID:</label><br>
+        <input type="number" [(ngModel)]="userGetId"><br><br>
+        <button (click)="getUserById()">Get</button><br><br>
+    <div>
+        <table *ngIf="isUserGotten && userGet.id!==0">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </thead>
+            <tbody>
+                <td>{{userGet.id}}</td>
+                <td>{{userGet.name}}</td>
+                <td>{{userGet.email}}</td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageGet">
+        {{messageGet}}<br><br>
+    </div>
+</div>

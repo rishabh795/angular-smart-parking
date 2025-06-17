@@ -1,0 +1,144 @@
+<div>
+    <h2>Create PaymentTransaction</h2><br><br>
+    <div>
+        <label>Amount:</label><br>
+        <input type="number" step="0.01" [(ngModel)]="paymentTransactionCreate.amount"><br><br>
+
+        <label>User ID:</label><br>
+        <select [(ngModel)]="paymentTransactionCreate.userId">
+            <option value="" selected disabled>Select Option</option>
+            <div *ngIf="allUsers">
+                <option *ngFor="let ele of allUsers" [value]="ele.id">{{ele.id}}</option>
+            </div>
+        </select><br><br>
+
+        
+
+        <label>Status:</label><br>
+        <select [(ngModel)]="paymentTransactionCreate.status">
+            <option value="" selected disabled>Select Option</option>
+            <option *ngFor="let ele of paymentStatusEnumList" [value]="ele">{{ele | titlecase}}</option>
+        </select><br><br>
+
+        <button (click)="createPaymentTransaction()">Create</button><br><br>
+    </div>
+    <div *ngIf="messageCreate">
+        {{messageCreate}}<br><br>
+    </div>
+</div>
+
+<div *ngIf="paymentTransactionUpdate && paymentTransactionUpdate.id!==0">
+    <h2>Update PaymentTransaction having ID: &nbsp; {{paymentTransactionUpdate.id}}</h2><br><br>
+    <div>
+        <label>Amount:</label><br>
+        <input type="number" step="0.01" [(ngModel)]="paymentTransactionUpdate.amount"><br><br>
+
+        <label>User ID:</label><br>
+        <select [(ngModel)]="paymentTransactionUpdate.userId">
+            <option value="" selected disabled>Select Option</option>
+            <div *ngIf="allUsers">
+                <option *ngFor="let ele of allUsers" [value]="ele.id">{{ele.id}}</option>
+            </div>
+        </select><br><br>
+
+        
+
+        <label>Status:</label><br>
+        <select [(ngModel)]="paymentTransactionUpdate.status">
+            <option value="" selected disabled>Select Option</option>
+            <option *ngFor="let ele of paymentStatusEnumList" [value]="ele">{{ele | titlecase}}</option>
+        </select><br><br>
+
+
+        <button (click)="updatePaymentTransactionById()">Update</button><br><br>
+    </div>
+    <div *ngIf="messageUpdate">
+        {{messageUpdate}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>List of All PaymentTransactions</h2><br><br>
+    <div>
+        <table *ngIf="paymentTransactionList">
+            <thead>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>User ID</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody *ngFor="let paymentTransaction of paymentTransactionList">
+                <td>{{paymentTransaction.id}}</td>
+                <td>{{paymentTransaction.amount}}</td>
+                <td>{{paymentTransaction.userId}}</td>
+                <td>{{paymentTransaction.status}}</td>
+                <td><button (click)="deletePaymentTransactionById(paymentTransaction.id!)">Delete</button></td>
+                <td><button (click)="populateUpdateForm(paymentTransaction)">Edit</button></td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageList">
+        {{messageList}}<br><br>
+    </div>
+    <div *ngIf="messageDelete">
+        {{messageDelete}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>Get PaymentTransaction By ID</h2><br><br>
+        <label>PaymentTransaction ID:</label><br>
+        <input type="number" [(ngModel)]="paymentTransactionGetId"><br><br>
+        <button (click)="getPaymentTransactionById()">Get</button><br><br>
+    <div>
+        <table *ngIf="isPaymentTransactionGotten && paymentTransactionGet.id!==0">
+            <thead>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>User ID</th>
+                <th>Status</th>
+            </thead>
+            <tbody>
+                <td>{{paymentTransactionGet.id}}</td>
+                <td>{{paymentTransactionGet.amount}}</td>
+                <td>{{paymentTransactionGet.userId}}</td>
+                <td>{{paymentTransactionGet.status}}</td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageGet">
+        {{messageGet}}<br><br>
+    </div>
+</div>
+
+<div>
+    <h2>Get PaymentTransaction Details By ID</h2><br><br>
+        <label>PaymentTransaction ID:</label><br>
+        <input type="number" [(ngModel)]="paymentTransactionDetailsId"><br><br>
+        <button (click)="getPaymentTransactionDetailsById()">Get</button><br><br>
+    <div>
+        <table *ngIf="isPaymentTransactionDetailsGotten && paymentTransactionDetails.id!==0">
+            <thead>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>User Details</th>
+                <th>Status</th>
+            </thead>
+            <tbody>
+                <td>{{paymentTransactionDetails.id}}</td>
+                <td>{{paymentTransactionDetails.amount}}</td>
+                <td>
+                    <span>ID:&nbsp;{{paymentTransactionDetails.user.id}}</span><br>
+                    <span>Name:&nbsp;{{paymentTransactionDetails.user.name}}</span><br>
+                    <span>Email:&nbsp;{{paymentTransactionDetails.user.email}}</span><br>
+                </td>
+                <td>{{paymentTransactionDetails.status}}</td>
+            </tbody>
+        </table><br><br>
+    </div>
+    <div *ngIf="messageDetails">
+        {{messageDetails}}<br><br>
+    </div>
+</div>
